@@ -18,12 +18,6 @@ public class TitleScene : BaseScene
     private void Start()
     {
         Init();
-        Managers.UI.ShowPopUpUI<EveryTimeSchedule>();
-        Managers.UI.ShowPopUpUI<TitleButtons>();
     }
 
-    private void GoBack()
-    {
-
-    }
 }
