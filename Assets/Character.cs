@@ -12,6 +12,9 @@ public class Character : MonoBehaviour
 
     void Start()
     {
+        //Taking Test
+        Talking();
+
         // 본인 캐릭터 RectTransform을 자동으로 할당 (만약 외부에서 지정 안 한 경우)
         if (character == null)
             character = GetComponent<RectTransform>();
@@ -60,5 +63,10 @@ public class Character : MonoBehaviour
         float y = Random.Range(-halfHeight, halfHeight);
 
         return new Vector2(x, y);
+    }
+
+    void Talking() // Character가 말하는 상태
+    {
+        Managers.UI.ShowPopUpUI<SpeechBalloon>();
     }
 }

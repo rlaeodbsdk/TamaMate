@@ -42,9 +42,15 @@ public class TransparentWindow : MonoBehaviour
 
     private IntPtr hWnd;
     private bool isTransparent = true;
+    private bool isBuild = true; // 에디터 구분용
 
     void Start()
     {
+#if UNITY_EDITOR
+        isBuild = false; // Unity 에디터 실행 중이면 false
+#endif
+        if (!isBuild) return;
+
         Application.runInBackground = true;
 
         hWnd = GetActiveWindow();
@@ -63,11 +69,13 @@ public class TransparentWindow : MonoBehaviour
 
     void Update()
     {
+        if (!isBuild) return; // 에디터에서는 아무것도 하지 않음
+
         bool isOverUI = IsPointerOverUI();
 
         if (isOverUI && isTransparent)
         {
-            SetClickThrough(false); // 클릭 가능
+            SetClickThrough(false); // UI 클릭 가능
         }
         else if (!isOverUI && !isTransparent)
         {
@@ -91,7 +99,6 @@ public class TransparentWindow : MonoBehaviour
         isTransparent = clickThrough;
     }
 
-    // Unity 포커스 없어도 동작하는 UI 감지
     bool IsPointerOverUI()
     {
         if (EventSystem.current == null) return false;
@@ -107,3 +114,4 @@ public class TransparentWindow : MonoBehaviour
         return results.Count > 0;
     }
 }
+
