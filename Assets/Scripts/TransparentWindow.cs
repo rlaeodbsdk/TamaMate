@@ -47,6 +47,7 @@ public class TransparentWindow : MonoBehaviour
     void Start()
     {
 #if UNITY_EDITOR
+        Debug.Log("??!");
         isBuild = false; // Unity 에디터 실행 중이면 false
 #endif
         if (!isBuild) return;
